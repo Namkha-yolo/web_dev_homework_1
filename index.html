@@ -1,0 +1,341 @@
+<!-- Namkha Tashi Oedzer
+     WEB DEV FALL 2025
+     Homework 1
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Cucina - Authentic Italian Cuisine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">Bella Cucina</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Bella Cucina</h1>
+            <p>Experience Authentic Italian Flavors</p>
+            <a href="#menu" class="btn">View Our Menu</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <!-- Appetizers -->
+            <div class="menu-card">
+                <h3>Appetizers</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Bruschetta Classica</h4>
+                        <p>Toasted bread with tomatoes, garlic, and basil</p>
+                    </div>
+                    <span class="price">$8.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Calamari Fritti</h4>
+                        <p>Crispy fried squid with marinara sauce</p>
+                    </div>
+                    <span class="price">$12.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Caprese Salad</h4>
+                        <p>Fresh mozzarella, tomatoes, and basil</p>
+                    </div>
+                    <span class="price">$10.99</span>
+                </div>
+            </div>
+
+            <!-- Main Courses -->
+            <div class="menu-card">
+                <h3>Main Courses</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Spaghetti Carbonara</h4>
+                        <p>Classic Roman pasta with pancetta and egg</p>
+                    </div>
+                    <span class="price">$18.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Lasagna Bolognese</h4>
+                        <p>Layers of pasta with rich meat sauce</p>
+                    </div>
+                    <span class="price">$19.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Osso Buco</h4>
+                        <p>Braised veal shanks with vegetables</p>
+                    </div>
+                    <span class="price">$28.99</span>
+                </div>
+            </div>
+
+            <!-- Pizza -->
+            <div class="menu-card">
+                <h3>Wood-Fired Pizza</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Margherita</h4>
+                        <p>Tomato sauce, mozzarella, and fresh basil</p>
+                    </div>
+                    <span class="price">$14.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Quattro Formaggi</h4>
+                        <p>Four cheese blend on a crispy crust</p>
+                    </div>
+                    <span class="price">$16.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Diavola</h4>
+                        <p>Spicy salami with chili oil</p>
+                    </div>
+                    <span class="price">$17.99</span>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-card">
+                <h3>Desserts</h3>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Tiramisu</h4>
+                        <p>Classic Italian coffee-flavored dessert</p>
+                    </div>
+                    <span class="price">$8.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Panna Cotta</h4>
+                        <p>Creamy vanilla pudding with berry sauce</p>
+                    </div>
+                    <span class="price">$7.99</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h4>Cannoli</h4>
+                        <p>Crispy pastry filled with sweet ricotta</p>
+                    </div>
+                    <span class="price">$6.99</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-container">
+            <button class="gallery-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="gallery-slider">
+                <div class="gallery-slide active">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800" alt="Delicious pasta dish">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Fresh pizza">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800" alt="Restaurant interior">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800" alt="Grilled steak">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=800" alt="Elegant dining area">
+                </div>
+                <div class="gallery-slide">
+                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800" alt="Dessert selection">
+                </div>
+            </div>
+            <button class="gallery-btn next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        <div class="gallery-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>Our Story</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Welcome to Bella Cucina, where passion meets tradition. Our restaurant was founded in 1985 by the Rossi family, who brought their authentic Italian recipes from the hills of Tuscany to share with the world.</p>
+                
+                <p>For nearly four decades, we've been serving the finest Italian cuisine, made with love and the freshest ingredients. Our signature dishes are prepared using recipes passed down through generations, each telling a story of Italian heritage and culinary excellence.</p>
+                
+                <p>From our wood-fired pizzas to our handmade pasta, every dish is crafted with care and attention to detail. We believe that great food brings people together, and our mission is to create memorable dining experiences that transport you straight to the heart of Italy.</p>
+                
+                <p>Join us for an unforgettable meal, where every bite is a celebration of Italian culture and tradition.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Restaurant ambiance">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                <h3>Send Us a Message</h3>
+                <form id="contactForm" onsubmit="sendEmail(event)">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                    <input type="email" id="email" placeholder="Your Email" required>
+                    <textarea id="message" placeholder="Your Message" rows="6" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-map">
+                <h3>Visit Us</h3>
+                <div id="map"></div>
+                <div class="map-info">
+                    <p><strong>Address:</strong> 123 Italian Street, New York, NY 10001</p>
+                    <button class="btn btn-small" onclick="openInGoogleMaps()">Get Directions</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Business Hours</h3>
+                <p>Monday - Thursday: 11:00 AM - 10:00 PM</p>
+                <p>Friday - Saturday: 11:00 AM - 11:00 PM</p>
+                <p>Sunday: 12:00 PM - 9:00 PM</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>123 Italian Street, New York, NY 10001</p>
+                <p>(555) 123-4567</p>
+                <p>namkhatashee@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">Facebook</a>
+                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="#" aria-label="Twitter">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Bella Cucina. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Gallery Slider
+        let currentIndex = 0;
+
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            slides[currentIndex].classList.remove('active');
+            dots[currentIndex].classList.remove('active');
+            
+            currentIndex += direction;
+            
+            if (currentIndex >= slides.length) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = slides.length - 1;
+            }
+            
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        function currentSlide(index) {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            slides[currentIndex].classList.remove('active');
+            dots[currentIndex].classList.remove('active');
+            
+            currentIndex = index;
+            
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        // Contact Form - mailto functionality
+        function sendEmail(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            const subject = `Message from ${name} - Bella Cucina Website`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            window.location.href = `mailto:namkhatashee@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Optional: Clear form after submission
+            document.getElementById('contactForm').reset();
+        }
+
+        // Auto-advance gallery every 5 seconds
+        setInterval(() => {
+            moveSlide(1);
+        }, 5000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.hamburger').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
