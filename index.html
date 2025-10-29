@@ -1,6 +1,6 @@
 <!-- Namkha Tashi Oedzer
      WEB DEV FALL 2025
-     Homework 1
+     Homework 2 - Shopping Cart Feature
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +21,10 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                <span class="cart-label">🛒 Cart</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
             <div class="hamburger" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -28,6 +32,28 @@
             </div>
         </nav>
     </header>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total:</strong>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn clear-cart" onclick="clearCart()">Clear Cart</button>
+            <button class="btn checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -50,21 +76,30 @@
                         <h4>Bruschetta Classica</h4>
                         <p>Toasted bread with tomatoes, garlic, and basil</p>
                     </div>
-                    <span class="price">$8.99</span>
+                    <div class="item-actions">
+                        <span class="price">$8.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Bruschetta Classica', 8.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Calamari Fritti</h4>
                         <p>Crispy fried squid with marinara sauce</p>
                     </div>
-                    <span class="price">$12.99</span>
+                    <div class="item-actions">
+                        <span class="price">$12.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Calamari Fritti', 12.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Caprese Salad</h4>
                         <p>Fresh mozzarella, tomatoes, and basil</p>
                     </div>
-                    <span class="price">$10.99</span>
+                    <div class="item-actions">
+                        <span class="price">$10.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Caprese Salad', 10.99)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
@@ -76,21 +111,30 @@
                         <h4>Spaghetti Carbonara</h4>
                         <p>Classic Roman pasta with pancetta and egg</p>
                     </div>
-                    <span class="price">$18.99</span>
+                    <div class="item-actions">
+                        <span class="price">$18.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Spaghetti Carbonara', 18.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Lasagna Bolognese</h4>
                         <p>Layers of pasta with rich meat sauce</p>
                     </div>
-                    <span class="price">$19.99</span>
+                    <div class="item-actions">
+                        <span class="price">$19.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Lasagna Bolognese', 19.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Osso Buco</h4>
                         <p>Braised veal shanks with vegetables</p>
                     </div>
-                    <span class="price">$28.99</span>
+                    <div class="item-actions">
+                        <span class="price">$28.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Osso Buco', 28.99)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
@@ -102,21 +146,30 @@
                         <h4>Margherita</h4>
                         <p>Tomato sauce, mozzarella, and fresh basil</p>
                     </div>
-                    <span class="price">$14.99</span>
+                    <div class="item-actions">
+                        <span class="price">$14.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Margherita', 14.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Quattro Formaggi</h4>
                         <p>Four cheese blend on a crispy crust</p>
                     </div>
-                    <span class="price">$16.99</span>
+                    <div class="item-actions">
+                        <span class="price">$16.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Quattro Formaggi', 16.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Diavola</h4>
                         <p>Spicy salami with chili oil</p>
                     </div>
-                    <span class="price">$17.99</span>
+                    <div class="item-actions">
+                        <span class="price">$17.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Diavola', 17.99)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
 
@@ -128,21 +181,30 @@
                         <h4>Tiramisu</h4>
                         <p>Classic Italian coffee-flavored dessert</p>
                     </div>
-                    <span class="price">$8.99</span>
+                    <div class="item-actions">
+                        <span class="price">$8.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Tiramisu', 8.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Panna Cotta</h4>
                         <p>Creamy vanilla pudding with berry sauce</p>
                     </div>
-                    <span class="price">$7.99</span>
+                    <div class="item-actions">
+                        <span class="price">$7.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Panna Cotta', 7.99)">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
                         <h4>Cannoli</h4>
                         <p>Crispy pastry filled with sweet ricotta</p>
                     </div>
-                    <span class="price">$6.99</span>
+                    <div class="item-actions">
+                        <span class="price">$6.99</span>
+                        <button class="add-to-cart" onclick="addToCart('Cannoli', 6.99)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -219,10 +281,10 @@
             </div>
             <div class="contact-map">
                 <h3>Visit Us</h3>
-                <div id="map"></div>
                 <div class="map-info">
                     <p><strong>Address:</strong> 123 Italian Street, New York, NY 10001</p>
-                    <button class="btn btn-small" onclick="openInGoogleMaps()">Get Directions</button>
+                    <p><strong>Phone:</strong> (555) 123-4567</p>
+                    <p><strong>Email:</strong> namkhatashee@gmail.com</p>
                 </div>
             </div>
         </div>
@@ -257,6 +319,7 @@
         </div>
     </footer>
 
+    <script src="cart.js"></script>
     <script>
         // Hamburger Menu Toggle
         function toggleMenu() {
