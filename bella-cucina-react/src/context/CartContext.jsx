@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { ordersApi } from '../services/api';
 
 const CartContext = createContext();
 
@@ -6,6 +7,7 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [notification, setNotification] = useState(null);
+  const [orderStatus, setOrderStatus] = useState({ loading: false, error: null, success: false });
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -59,6 +61,41 @@ export function CartProvider({ children }) {
     }
   };
 
+  const submitOrder = async (customerInfo = {}) => {
+    if (cart.length === 0) {
+      setOrderStatus({ loading: false, error: 'Cart is empty', success: false });
+      return null;
+    }
+
+    setOrderStatus({ loading: true, error: null, success: false });
+
+    try {
+      const orderData = {
+        items: cart,
+        customerInfo
+      };
+
+      const order = await ordersApi.create(orderData);
+
+      // Clear cart after successful order
+      setCart([]);
+      localStorage.removeItem('bellaCucinaCart');
+
+      setOrderStatus({ loading: false, error: null, success: true });
+      setIsCartOpen(false);
+
+      return order;
+    } catch (error) {
+      console.error('Failed to submit order:', error);
+      setOrderStatus({ loading: false, error: error.message, success: false });
+      return null;
+    }
+  };
+
+  const resetOrderStatus = () => {
+    setOrderStatus({ loading: false, error: null, success: false });
+  };
+
   const showNotification = (itemName) => {
     setNotification(itemName);
     setTimeout(() => setNotification(null), 2300);
@@ -78,12 +115,15 @@ export function CartProvider({ children }) {
       notification,
       cartTotal,
       cartCount,
+      orderStatus,
       addToCart,
       removeFromCart,
       updateQuantity,
       clearCart,
       toggleCart,
-      setIsCartOpen
+      setIsCartOpen,
+      submitOrder,
+      resetOrderStatus
     }}>
       {children}
     </CartContext.Provider>

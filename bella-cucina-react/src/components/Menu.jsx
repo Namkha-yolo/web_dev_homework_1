@@ -1,14 +1,51 @@
+import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { menuData } from '../data/menuData';
+import { menuApi } from '../services/api';
+import { menuData as fallbackMenuData } from '../data/menuData';
 
 export default function Menu() {
   const { addToCart } = useCart();
+  const [menuData, setMenuData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const data = await menuApi.getAll();
+        setMenuData(data);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to fetch menu from API, using fallback data:', err);
+        setMenuData(fallbackMenuData);
+        setError('Using cached menu data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="menu" className="py-20 px-[5%] max-w-7xl mx-auto">
+        <h2 className="text-center text-3xl md:text-4xl font-bold text-gold mb-12">
+          Our Menu
+        </h2>
+        <div className="text-center text-gray-600">Loading menu...</div>
+      </section>
+    );
+  }
 
   return (
     <section id="menu" className="py-20 px-[5%] max-w-7xl mx-auto">
       <h2 className="text-center text-3xl md:text-4xl font-bold text-gold mb-12">
         Our Menu
       </h2>
+      {error && (
+        <p className="text-center text-gray-500 text-sm mb-4">{error}</p>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         {menuData.map((category) => (
           <div
