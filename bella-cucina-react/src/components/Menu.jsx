@@ -8,16 +8,19 @@ export default function Menu() {
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
     const fetchMenu = async () => {
       try {
         const data = await menuApi.getAll();
         setMenuData(data);
+        setActiveCategory(data[0]?.category || null);
         setError(null);
       } catch (err) {
         console.error('Failed to fetch menu from API, using fallback data:', err);
         setMenuData(fallbackMenuData);
+        setActiveCategory(fallbackMenuData[0]?.category || null);
         setError('Using cached menu data');
       } finally {
         setLoading(false);
@@ -29,73 +32,82 @@ export default function Menu() {
 
   if (loading) {
     return (
-      <section id="menu" className="py-24 px-[5%]" style={{ backgroundColor: '#f9fafb' }}>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
-            Our Menu
+      <section id="menu" style={{ backgroundColor: '#1a1a1a' }} className="py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-gold uppercase tracking-[0.3em] text-sm mb-4">Our Selection</p>
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8" style={{ fontFamily: 'Georgia, serif' }}>
+            The Menu
           </h2>
-          <p className="text-center text-gray-600 mb-16 text-lg">
-            Authentic Italian dishes made with love
-          </p>
-          <div className="text-center text-gray-500 text-lg">Loading menu...</div>
+          <p className="text-gray-400 text-lg">Loading menu...</p>
         </div>
       </section>
     );
   }
 
+  const currentCategory = menuData.find(cat => cat.category === activeCategory);
+
   return (
-    <section id="menu" className="py-24 px-[5%]" style={{ backgroundColor: '#f9fafb' }}>
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
-          Our Menu
-        </h2>
-        <p className="text-center text-gray-600 mb-16 text-lg">
-          Authentic Italian dishes made with love
-        </p>
-        {error && (
-          <p className="text-center text-gray-500 text-sm mb-4">{error}</p>
-        )}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section id="menu" style={{ backgroundColor: '#1a1a1a' }} className="py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="text-gold uppercase tracking-[0.3em] text-sm mb-4">Our Selection</p>
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+            The Menu
+          </h2>
+          {error && <p className="text-gray-500 text-sm">{error}</p>}
+        </div>
+
+        {/* Category Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-16">
           {menuData.map((category) => (
-            <div
+            <button
               key={category.category}
-              style={{ backgroundColor: '#ffffff' }}
-              className="rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              onClick={() => setActiveCategory(category.category)}
+              className={`px-6 py-3 text-sm md:text-base font-medium uppercase tracking-wider transition-all duration-300 ${
+                activeCategory === category.category
+                  ? 'text-black'
+                  : 'text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500'
+              }`}
+              style={activeCategory === category.category ? { backgroundColor: '#d4af37' } : {}}
             >
-              <h3 className="text-gold text-2xl font-bold mb-6 pb-3 border-b-2 border-gold">
-                {category.category}
-              </h3>
-              <div className="space-y-6">
-                {category.items.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex justify-between items-start gap-4 pb-6 border-b border-gray-100 last:border-b-0 last:pb-0"
-                  >
-                    <div className="flex-1">
-                      <h4 className="text-gray-800 text-lg font-semibold mb-1">
-                        {item.name}
-                      </h4>
-                      <p className="text-gray-500 text-sm leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                    <div className="flex flex-col items-end gap-3">
-                      <span className="text-gold font-bold text-xl">
-                        ${item.price.toFixed(2)}
-                      </span>
-                      <button
-                        onClick={() => addToCart(item)}
-                        className="bg-gold text-black px-5 py-2 rounded-full font-bold text-sm hover:bg-gold-dark hover:scale-105 active:scale-100 transition-all duration-300 cursor-pointer whitespace-nowrap shadow-md"
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+              {category.category}
+            </button>
           ))}
         </div>
+
+        {/* Menu Items */}
+        {currentCategory && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+            {currentCategory.items.map((item) => (
+              <div
+                key={item.id}
+                className="group border-b border-gray-800 pb-8"
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:text-gold transition-colors" style={{ fontFamily: 'Georgia, serif' }}>
+                    {item.name}
+                  </h3>
+                  <span className="text-gold text-xl md:text-2xl font-bold ml-4">
+                    ${item.price.toFixed(2)}
+                  </span>
+                </div>
+                <p className="text-gray-400 mb-4 leading-relaxed">
+                  {item.description}
+                </p>
+                <button
+                  onClick={() => addToCart(item)}
+                  className="text-gold text-sm uppercase tracking-wider font-medium hover:text-white transition-colors duration-300 flex items-center gap-2"
+                >
+                  <span>Add to Cart</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

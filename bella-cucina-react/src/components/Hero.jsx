@@ -10,25 +10,44 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center text-center text-white pt-[70px] bg-cover bg-center bg-fixed"
       style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600')`
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
       }}
+      className="min-h-screen flex items-center justify-center pt-16"
     >
-      <div className="px-6 py-20 max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gold mb-6 drop-shadow-lg tracking-tight">
+      <div className="text-center px-6 max-w-5xl">
+        <p className="text-gold uppercase tracking-[0.3em] text-sm md:text-base mb-6 font-medium">
+          Authentic Italian Cuisine
+        </p>
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8" style={{ fontFamily: 'Georgia, serif' }}>
           Bella Cucina
         </h1>
-        <p className="text-xl md:text-3xl mb-10 text-gray-200 font-light">
-          Experience Authentic Italian Flavors
+        <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          Experience the finest Italian flavors, crafted with passion and tradition since 1985
         </p>
-        <a
-          href="#menu"
-          onClick={handleViewMenu}
-          className="inline-block px-10 py-4 bg-gold text-black no-underline rounded-full font-bold text-lg hover:bg-gold-dark hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
-        >
-          View Our Menu
-        </a>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#menu"
+            onClick={handleViewMenu}
+            style={{ backgroundColor: '#d4af37' }}
+            className="px-10 py-4 text-black font-bold text-lg rounded-none hover:opacity-90 transition-all duration-300 uppercase tracking-wider"
+          >
+            View Menu
+          </a>
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="px-10 py-4 border-2 border-white text-white font-bold text-lg rounded-none hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-wider"
+          >
+            Reservations
+          </a>
+        </div>
       </div>
     </section>
   );
