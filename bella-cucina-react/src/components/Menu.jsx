@@ -29,7 +29,7 @@ export default function Menu() {
 
   if (loading) {
     return (
-      <section id="menu" className="py-24 px-[5%] bg-gray-50">
+      <section id="menu" className="py-24 px-[5%]" style={{ backgroundColor: '#f9fafb' }}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
             Our Menu
@@ -44,7 +44,7 @@ export default function Menu() {
   }
 
   return (
-    <section id="menu" className="py-24 px-[5%] bg-gray-50">
+    <section id="menu" className="py-24 px-[5%]" style={{ backgroundColor: '#f9fafb' }}>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
           Our Menu
@@ -59,7 +59,8 @@ export default function Menu() {
           {menuData.map((category) => (
             <div
               key={category.category}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              style={{ backgroundColor: '#ffffff' }}
+              className="rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300"
             >
               <h3 className="text-gold text-2xl font-bold mb-6 pb-3 border-b-2 border-gold">
                 {category.category}

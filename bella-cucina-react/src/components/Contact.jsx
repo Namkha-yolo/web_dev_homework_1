@@ -24,7 +24,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-[5%] bg-gray-50">
+    <section id="contact" className="py-24 px-[5%]" style={{ backgroundColor: '#f9fafb' }}>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
           Contact Us
@@ -35,7 +35,7 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
+          <div className="p-8 rounded-2xl shadow-lg" style={{ backgroundColor: '#ffffff' }}>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">
               Send Us a Message
             </h3>
@@ -81,7 +81,7 @@ export default function Contact() {
             <h3 className="text-2xl font-bold text-gray-800 mb-6">
               Visit Us
             </h3>
-            <div className="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+            <div className="p-8 rounded-2xl shadow-lg space-y-6" style={{ backgroundColor: '#ffffff' }}>
               <div className="flex items-start gap-4">
                 <span className="text-2xl">📍</span>
                 <div>
