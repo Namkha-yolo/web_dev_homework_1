@@ -12,73 +12,56 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-[#faf8f5]">
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="contact" style={{ backgroundColor: '#faf8f5', padding: '80px 20px' }}>
+      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-[#b8860b] uppercase tracking-[0.3em] text-sm mb-4">Contact</p>
-          <h2 className="text-4xl md:text-5xl mb-4" style={{ fontFamily: 'Georgia, serif' }}>Get in Touch</h2>
-          <div className="w-16 h-[1px] bg-[#b8860b] mx-auto"></div>
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <p style={{ color: '#b8860b', textTransform: 'uppercase', letterSpacing: '3px', fontSize: '14px', marginBottom: '16px' }}>Contact</p>
+          <h2 style={{ fontSize: '40px', fontFamily: 'Georgia, serif', marginBottom: '16px' }}>Get in Touch</h2>
+          <div style={{ width: '60px', height: '2px', backgroundColor: '#b8860b', margin: '0 auto' }}></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
           {/* Info */}
           <div>
-            <h3 className="text-2xl mb-8" style={{ fontFamily: 'Georgia, serif' }}>Visit Us</h3>
+            <h3 style={{ fontSize: '24px', fontFamily: 'Georgia, serif', marginBottom: '24px' }}>Visit Us</h3>
 
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-[#b8860b] text-white flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Address</h4>
-                  <p className="text-gray-600">123 Italian Street, New York, NY 10001</p>
-                </div>
-              </div>
+            <div style={{ marginBottom: '20px' }}>
+              <h4 style={{ fontWeight: '600', marginBottom: '4px' }}>Address</h4>
+              <p style={{ color: '#666' }}>123 Italian Street, New York, NY 10001</p>
+            </div>
 
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-[#b8860b] text-white flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Phone</h4>
-                  <p className="text-gray-600">(555) 123-4567</p>
-                </div>
-              </div>
+            <div style={{ marginBottom: '20px' }}>
+              <h4 style={{ fontWeight: '600', marginBottom: '4px' }}>Phone</h4>
+              <p style={{ color: '#666' }}>(555) 123-4567</p>
+            </div>
 
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-[#b8860b] text-white flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Hours</h4>
-                  <p className="text-gray-600">Mon-Thu: 11am-10pm</p>
-                  <p className="text-gray-600">Fri-Sat: 11am-11pm</p>
-                  <p className="text-gray-600">Sun: 12pm-9pm</p>
-                </div>
-              </div>
+            <div style={{ marginBottom: '20px' }}>
+              <h4 style={{ fontWeight: '600', marginBottom: '4px' }}>Hours</h4>
+              <p style={{ color: '#666' }}>Mon-Thu: 11am-10pm</p>
+              <p style={{ color: '#666' }}>Fri-Sat: 11am-11pm</p>
+              <p style={{ color: '#666' }}>Sun: 12pm-9pm</p>
             </div>
           </div>
 
           {/* Form */}
           <div>
-            <h3 className="text-2xl mb-8" style={{ fontFamily: 'Georgia, serif' }}>Send a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <h3 style={{ fontSize: '24px', fontFamily: 'Georgia, serif', marginBottom: '24px' }}>Send a Message</h3>
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
-                className="w-full px-4 py-3 border border-gray-300 focus:border-[#b8860b] focus:outline-none transition-colors"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  marginBottom: '16px',
+                  border: '1px solid #ddd',
+                  fontSize: '14px',
+                  boxSizing: 'border-box'
+                }}
               />
               <input
                 type="email"
@@ -86,19 +69,43 @@ export default function Contact() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
-                className="w-full px-4 py-3 border border-gray-300 focus:border-[#b8860b] focus:outline-none transition-colors"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  marginBottom: '16px',
+                  border: '1px solid #ddd',
+                  fontSize: '14px',
+                  boxSizing: 'border-box'
+                }}
               />
               <textarea
                 placeholder="Your Message"
-                rows="5"
+                rows="4"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 required
-                className="w-full px-4 py-3 border border-gray-300 focus:border-[#b8860b] focus:outline-none transition-colors resize-none"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  marginBottom: '16px',
+                  border: '1px solid #ddd',
+                  fontSize: '14px',
+                  resize: 'none',
+                  boxSizing: 'border-box'
+                }}
               />
               <button
                 type="submit"
-                className="px-8 py-4 bg-[#b8860b] text-white uppercase tracking-wider text-sm hover:bg-[#996f0a] transition-colors"
+                style={{
+                  padding: '12px 32px',
+                  backgroundColor: '#b8860b',
+                  color: '#fff',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}
               >
                 Send Message
               </button>
