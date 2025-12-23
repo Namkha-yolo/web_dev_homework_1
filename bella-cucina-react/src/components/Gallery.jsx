@@ -1,47 +1,43 @@
-import { useState, useEffect } from 'react';
 import { galleryImages } from '../data/menuData';
 
 export default function Gallery() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section id="gallery" className="py-20 bg-[#1a1a1a]">
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="gallery" style={{ backgroundColor: '#1a1a1a', padding: '80px 20px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-[#b8860b] uppercase tracking-[0.3em] text-sm mb-4">Gallery</p>
-          <h2 className="text-4xl md:text-5xl text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>
-            Our Atmosphere
-          </h2>
-          <div className="w-16 h-[1px] bg-[#b8860b] mx-auto"></div>
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <p style={{ color: '#b8860b', textTransform: 'uppercase', letterSpacing: '3px', fontSize: '14px', marginBottom: '16px' }}>Gallery</p>
+          <h2 style={{ fontSize: '48px', fontFamily: 'Georgia, serif', marginBottom: '16px', color: '#fff' }}>Our Atmosphere</h2>
+          <div style={{ width: '60px', height: '2px', backgroundColor: '#b8860b', margin: '0 auto' }}></div>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {/* Image Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '16px'
+        }}>
           {galleryImages.map((image, index) => (
             <div
               key={index}
-              className={`relative overflow-hidden cursor-pointer group ${
-                index === 0 ? 'md:col-span-2 md:row-span-2' : ''
-              }`}
+              style={{
+                position: 'relative',
+                overflow: 'hidden',
+                height: '250px'
+              }}
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                  index === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'
-                }`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transition: 'transform 0.5s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="text-white text-sm uppercase tracking-wider">{image.alt}</span>
-              </div>
             </div>
           ))}
         </div>

@@ -26,68 +26,104 @@ export default function Menu() {
 
   if (loading) {
     return (
-      <section id="menu" className="py-20 bg-[#faf8f5]">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-[#b8860b] uppercase tracking-[0.3em] text-sm mb-4">Discover</p>
-          <h2 className="text-4xl md:text-5xl mb-4" style={{ fontFamily: 'Georgia, serif' }}>Our Menu</h2>
-          <p className="text-gray-500">Loading...</p>
+      <section id="menu" style={{ backgroundColor: '#faf8f5', padding: '80px 20px' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ color: '#b8860b', textTransform: 'uppercase', letterSpacing: '3px', fontSize: '14px', marginBottom: '16px' }}>Discover</p>
+          <h2 style={{ fontSize: '48px', fontFamily: 'Georgia, serif', marginBottom: '16px' }}>Our Menu</h2>
+          <p style={{ color: '#666' }}>Loading...</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="menu" className="py-20 bg-[#faf8f5]">
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="menu" style={{ backgroundColor: '#faf8f5', padding: '80px 20px' }}>
+      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-[#b8860b] uppercase tracking-[0.3em] text-sm mb-4">Discover</p>
-          <h2 className="text-4xl md:text-5xl mb-4" style={{ fontFamily: 'Georgia, serif' }}>Our Menu</h2>
-          <div className="w-16 h-[1px] bg-[#b8860b] mx-auto"></div>
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <p style={{ color: '#b8860b', textTransform: 'uppercase', letterSpacing: '3px', fontSize: '14px', marginBottom: '16px' }}>Discover</p>
+          <h2 style={{ fontSize: '48px', fontFamily: 'Georgia, serif', marginBottom: '16px' }}>Our Menu</h2>
+          <div style={{ width: '60px', height: '2px', backgroundColor: '#b8860b', margin: '0 auto' }}></div>
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px', marginBottom: '48px' }}>
           {menuData.map((category, index) => (
             <button
               key={category.category}
               onClick={() => setActiveTab(index)}
-              className={`px-6 py-3 text-sm uppercase tracking-wider transition-all ${
-                activeTab === index
-                  ? 'bg-[#b8860b] text-white'
-                  : 'bg-white text-gray-600 hover:text-[#b8860b] border border-gray-200'
-              }`}
+              style={{
+                padding: '12px 24px',
+                fontSize: '14px',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                cursor: 'pointer',
+                border: activeTab === index ? 'none' : '1px solid #ddd',
+                backgroundColor: activeTab === index ? '#b8860b' : '#fff',
+                color: activeTab === index ? '#fff' : '#666',
+                transition: 'all 0.3s'
+              }}
             >
               {category.category}
             </button>
           ))}
         </div>
 
-        {/* Menu Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {menuData[activeTab]?.items.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white p-6 flex justify-between items-start gap-4 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="flex-1">
-                <div className="flex items-baseline gap-3 mb-2">
-                  <h3 className="text-xl font-semibold text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
-                    {item.name}
-                  </h3>
-                  <span className="flex-1 border-b border-dotted border-gray-300"></span>
-                  <span className="text-[#b8860b] font-bold text-lg">${item.price.toFixed(2)}</span>
-                </div>
-                <p className="text-gray-500 text-sm mb-4">{item.description}</p>
-                <button
-                  onClick={() => addToCart(item)}
-                  className="text-[#b8860b] text-sm uppercase tracking-wider font-medium hover:text-[#996f0a] transition-colors"
+        {/* Menu Table */}
+        <div style={{ backgroundColor: '#fff', padding: '32px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ borderBottom: '2px solid #b8860b' }}>
+                <th style={{ textAlign: 'left', padding: '16px', fontFamily: 'Georgia, serif', fontSize: '18px', color: '#333' }}>Dish</th>
+                <th style={{ textAlign: 'left', padding: '16px', fontFamily: 'Georgia, serif', fontSize: '18px', color: '#333' }}>Description</th>
+                <th style={{ textAlign: 'right', padding: '16px', fontFamily: 'Georgia, serif', fontSize: '18px', color: '#333' }}>Price</th>
+                <th style={{ textAlign: 'center', padding: '16px', fontFamily: 'Georgia, serif', fontSize: '18px', color: '#333' }}>Order</th>
+              </tr>
+            </thead>
+            <tbody>
+              {menuData[activeTab]?.items.map((item, index) => (
+                <tr
+                  key={item.id}
+                  style={{
+                    borderBottom: index === menuData[activeTab].items.length - 1 ? 'none' : '1px solid #eee',
+                    transition: 'background-color 0.3s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#faf8f5'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 >
-                  + Add to Cart
-                </button>
-              </div>
-            </div>
-          ))}
+                  <td style={{ padding: '20px 16px', fontWeight: '600', fontSize: '16px', color: '#333' }}>
+                    {item.name}
+                  </td>
+                  <td style={{ padding: '20px 16px', color: '#666', fontSize: '14px' }}>
+                    {item.description}
+                  </td>
+                  <td style={{ padding: '20px 16px', textAlign: 'right', color: '#b8860b', fontWeight: '700', fontSize: '18px' }}>
+                    ${item.price.toFixed(2)}
+                  </td>
+                  <td style={{ padding: '20px 16px', textAlign: 'center' }}>
+                    <button
+                      onClick={() => addToCart(item)}
+                      style={{
+                        padding: '8px 16px',
+                        backgroundColor: '#b8860b',
+                        color: '#fff',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '12px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        transition: 'background-color 0.3s'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#996f0a'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#b8860b'}
+                    >
+                      Add
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
