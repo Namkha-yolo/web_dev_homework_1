@@ -7,107 +7,88 @@ export default function Menu() {
   const { addToCart } = useCart();
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     const fetchMenu = async () => {
       try {
         const data = await menuApi.getAll();
         setMenuData(data);
-        setActiveCategory(data[0]?.category || null);
-        setError(null);
       } catch (err) {
-        console.error('Failed to fetch menu from API, using fallback data:', err);
+        console.error('Using fallback data:', err);
         setMenuData(fallbackMenuData);
-        setActiveCategory(fallbackMenuData[0]?.category || null);
-        setError('Using cached menu data');
       } finally {
         setLoading(false);
       }
     };
-
     fetchMenu();
   }, []);
 
   if (loading) {
     return (
-      <section id="menu" style={{ backgroundColor: '#1a1a1a' }} className="py-20 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gold uppercase tracking-[0.3em] text-sm mb-4">Our Selection</p>
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8" style={{ fontFamily: 'Georgia, serif' }}>
-            The Menu
-          </h2>
-          <p className="text-gray-400 text-lg">Loading menu...</p>
+      <section id="menu" className="py-20 bg-[#faf8f5]">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p className="text-[#b8860b] uppercase tracking-[0.3em] text-sm mb-4">Discover</p>
+          <h2 className="text-4xl md:text-5xl mb-4" style={{ fontFamily: 'Georgia, serif' }}>Our Menu</h2>
+          <p className="text-gray-500">Loading...</p>
         </div>
       </section>
     );
   }
 
-  const currentCategory = menuData.find(cat => cat.category === activeCategory);
-
   return (
-    <section id="menu" style={{ backgroundColor: '#1a1a1a' }} className="py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="menu" className="py-20 bg-[#faf8f5]">
+      <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-gold uppercase tracking-[0.3em] text-sm mb-4">Our Selection</p>
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>
-            The Menu
-          </h2>
-          {error && <p className="text-gray-500 text-sm">{error}</p>}
+        <div className="text-center mb-12">
+          <p className="text-[#b8860b] uppercase tracking-[0.3em] text-sm mb-4">Discover</p>
+          <h2 className="text-4xl md:text-5xl mb-4" style={{ fontFamily: 'Georgia, serif' }}>Our Menu</h2>
+          <div className="w-16 h-[1px] bg-[#b8860b] mx-auto"></div>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-16">
-          {menuData.map((category) => (
+        {/* Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {menuData.map((category, index) => (
             <button
               key={category.category}
-              onClick={() => setActiveCategory(category.category)}
-              className={`px-6 py-3 text-sm md:text-base font-medium uppercase tracking-wider transition-all duration-300 ${
-                activeCategory === category.category
-                  ? 'text-black'
-                  : 'text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500'
+              onClick={() => setActiveTab(index)}
+              className={`px-6 py-3 text-sm uppercase tracking-wider transition-all ${
+                activeTab === index
+                  ? 'bg-[#b8860b] text-white'
+                  : 'bg-white text-gray-600 hover:text-[#b8860b] border border-gray-200'
               }`}
-              style={activeCategory === category.category ? { backgroundColor: '#d4af37' } : {}}
             >
               {category.category}
             </button>
           ))}
         </div>
 
-        {/* Menu Items */}
-        {currentCategory && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
-            {currentCategory.items.map((item) => (
-              <div
-                key={item.id}
-                className="group border-b border-gray-800 pb-8"
-              >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:text-gold transition-colors" style={{ fontFamily: 'Georgia, serif' }}>
+        {/* Menu Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {menuData[activeTab]?.items.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white p-6 flex justify-between items-start gap-4 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="flex-1">
+                <div className="flex items-baseline gap-3 mb-2">
+                  <h3 className="text-xl font-semibold text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
                     {item.name}
                   </h3>
-                  <span className="text-gold text-xl md:text-2xl font-bold ml-4">
-                    ${item.price.toFixed(2)}
-                  </span>
+                  <span className="flex-1 border-b border-dotted border-gray-300"></span>
+                  <span className="text-[#b8860b] font-bold text-lg">${item.price.toFixed(2)}</span>
                 </div>
-                <p className="text-gray-400 mb-4 leading-relaxed">
-                  {item.description}
-                </p>
+                <p className="text-gray-500 text-sm mb-4">{item.description}</p>
                 <button
                   onClick={() => addToCart(item)}
-                  className="text-gold text-sm uppercase tracking-wider font-medium hover:text-white transition-colors duration-300 flex items-center gap-2"
+                  className="text-[#b8860b] text-sm uppercase tracking-wider font-medium hover:text-[#996f0a] transition-colors"
                 >
-                  <span>Add to Cart</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
+                  + Add to Cart
                 </button>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

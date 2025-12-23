@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #d4af37;
-  --color-gold-dark: #c4a037;
+  --color-gold: #b8860b;
+  --color-gold-dark: #996f0a;
   --color-dark: #1a1a1a;
-  --font-family-serif: Georgia, serif;
+  --font-family-serif: 'Playfair Display', Georgia, serif;
 }
 
 * {
@@ -18,9 +18,10 @@ html {
 }
 
 body {
-  font-family: var(--font-family-serif);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.6;
   color: #333;
+  background-color: #fff;
 }
 
 /* Custom scrollbar */
@@ -55,4 +56,12 @@ body {
 
 .animate-slide-in {
   animation: slideIn 0.3s ease-out;
+}
+
+/* Section separator */
+.section-separator {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #b8860b, transparent);
+  margin: 0 auto;
 }

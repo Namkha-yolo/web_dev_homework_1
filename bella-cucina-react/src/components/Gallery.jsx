@@ -4,92 +4,45 @@ import { galleryImages } from '../data/menuData';
 export default function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const moveSlide = (direction) => {
-    setCurrentIndex((prev) => {
-      const newIndex = prev + direction;
-      if (newIndex >= galleryImages.length) return 0;
-      if (newIndex < 0) return galleryImages.length - 1;
-      return newIndex;
-    });
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
-      moveSlide(1);
-    }, 5000);
+      setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section id="gallery" style={{ backgroundColor: '#1a1a1a' }} className="py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="gallery" className="py-20 bg-[#1a1a1a]">
+      <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-gold uppercase tracking-[0.3em] text-sm mb-4">Visual Journey</p>
-          <h2 className="text-5xl md:text-6xl font-bold text-white" style={{ fontFamily: 'Georgia, serif' }}>
-            Gallery
+        <div className="text-center mb-12">
+          <p className="text-[#b8860b] uppercase tracking-[0.3em] text-sm mb-4">Gallery</p>
+          <h2 className="text-4xl md:text-5xl text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+            Our Atmosphere
           </h2>
+          <div className="w-16 h-[1px] bg-[#b8860b] mx-auto"></div>
         </div>
 
-        {/* Main Slider */}
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div className="relative h-[400px] md:h-[600px]">
-              {galleryImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-700 ${
-                    index === currentIndex ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <button
-            onClick={() => moveSlide(-1)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={() => moveSlide(1)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          {/* Counter */}
-          <div className="absolute bottom-6 right-6 text-white text-sm">
-            <span className="text-gold font-bold text-2xl">{String(currentIndex + 1).padStart(2, '0')}</span>
-            <span className="text-gray-500 mx-2">/</span>
-            <span className="text-gray-500">{String(galleryImages.length).padStart(2, '0')}</span>
-          </div>
-        </div>
-
-        {/* Thumbnails */}
-        <div className="flex justify-center gap-3 mt-8">
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {galleryImages.map((image, index) => (
-            <button
+            <div
               key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-20 h-14 overflow-hidden transition-all duration-300 ${
-                index === currentIndex ? 'ring-2 ring-gold' : 'opacity-50 hover:opacity-100'
+              className={`relative overflow-hidden cursor-pointer group ${
+                index === 0 ? 'md:col-span-2 md:row-span-2' : ''
               }`}
             >
-              <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
-            </button>
+              <img
+                src={image.src}
+                alt={image.alt}
+                className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
+                  index === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'
+                }`}
+              />
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span className="text-white text-sm uppercase tracking-wider">{image.alt}</span>
+              </div>
+            </div>
           ))}
         </div>
       </div>
