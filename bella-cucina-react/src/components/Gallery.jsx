@@ -26,12 +26,15 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="gallery" className="py-20 px-[5%] bg-gray-100">
-      <h2 className="text-center text-3xl md:text-4xl font-bold text-gold mb-12">
+    <section id="gallery" className="py-24 px-[5%] bg-dark">
+      <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
         Gallery
       </h2>
+      <p className="text-center text-gray-400 mb-16 text-lg">
+        A glimpse into our world
+      </p>
 
-      <div className="relative max-w-4xl mx-auto overflow-hidden rounded-lg">
+      <div className="relative max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-2xl">
         {/* Slider Container */}
         <div className="relative h-[300px] md:h-[500px]">
           {galleryImages.map((image, index) => (
@@ -53,26 +56,26 @@ export default function Gallery() {
         {/* Navigation Buttons */}
         <button
           onClick={() => moveSlide(-1)}
-          className="absolute left-3 top-1/2 -translate-y-1/2 bg-gold/80 text-white border-none px-4 py-3 text-xl cursor-pointer hover:bg-gold transition-colors duration-300 z-10"
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-12 h-12 rounded-full text-xl cursor-pointer hover:bg-gold transition-all duration-300 z-10 backdrop-blur-sm"
         >
           &#10094;
         </button>
         <button
           onClick={() => moveSlide(1)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 bg-gold/80 text-white border-none px-4 py-3 text-xl cursor-pointer hover:bg-gold transition-colors duration-300 z-10"
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-12 h-12 rounded-full text-xl cursor-pointer hover:bg-gold transition-all duration-300 z-10 backdrop-blur-sm"
         >
           &#10095;
         </button>
       </div>
 
       {/* Dots */}
-      <div className="text-center mt-6">
+      <div className="text-center mt-8">
         {galleryImages.map((_, index) => (
           <span
             key={index}
             onClick={() => goToSlide(index)}
-            className={`inline-block w-3 h-3 rounded-full mx-1 cursor-pointer transition-colors duration-300 ${
-              index === currentIndex ? 'bg-gold' : 'bg-gray-400'
+            className={`inline-block w-3 h-3 rounded-full mx-2 cursor-pointer transition-all duration-300 ${
+              index === currentIndex ? 'bg-gold w-8' : 'bg-gray-600 hover:bg-gray-400'
             }`}
           />
         ))}

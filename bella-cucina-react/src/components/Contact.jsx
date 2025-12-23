@@ -24,19 +24,22 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-[5%] bg-gray-100">
+    <section id="contact" className="py-24 px-[5%] bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-4xl font-bold text-gold mb-12">
+        <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
           Contact Us
         </h2>
+        <p className="text-center text-gray-600 mb-16 text-lg">
+          We&apos;d love to hear from you
+        </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <div>
+          <div className="bg-white p-8 rounded-2xl shadow-lg">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">
               Send Us a Message
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <input
                 type="text"
                 name="name"
@@ -44,7 +47,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Your Name"
                 required
-                className="w-full p-4 border border-gray-300 rounded focus:outline-none focus:border-gold font-inherit text-base"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 font-inherit text-base transition-all"
               />
               <input
                 type="email"
@@ -53,7 +56,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Your Email"
                 required
-                className="w-full p-4 border border-gray-300 rounded focus:outline-none focus:border-gold font-inherit text-base"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 font-inherit text-base transition-all"
               />
               <textarea
                 name="message"
@@ -62,11 +65,11 @@ export default function Contact() {
                 placeholder="Your Message"
                 rows="6"
                 required
-                className="w-full p-4 border border-gray-300 rounded focus:outline-none focus:border-gold font-inherit text-base resize-y"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 font-inherit text-base resize-y transition-all"
               />
               <button
                 type="submit"
-                className="inline-block px-8 py-4 bg-gold text-black rounded font-bold hover:bg-gold-dark hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                className="inline-block px-10 py-4 bg-gold text-black rounded-full font-bold text-lg hover:bg-gold-dark hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 Send Message
               </button>
@@ -78,16 +81,28 @@ export default function Contact() {
             <h3 className="text-2xl font-bold text-gray-800 mb-6">
               Visit Us
             </h3>
-            <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
-              <p className="leading-relaxed">
-                <strong>Address:</strong> 123 Italian Street, New York, NY 10001
-              </p>
-              <p className="leading-relaxed">
-                <strong>Phone:</strong> (555) 123-4567
-              </p>
-              <p className="leading-relaxed">
-                <strong>Email:</strong> namkhatashee@gmail.com
-              </p>
+            <div className="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+              <div className="flex items-start gap-4">
+                <span className="text-2xl">📍</span>
+                <div>
+                  <p className="font-bold text-gray-800">Address</p>
+                  <p className="text-gray-600">123 Italian Street, New York, NY 10001</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <span className="text-2xl">📞</span>
+                <div>
+                  <p className="font-bold text-gray-800">Phone</p>
+                  <p className="text-gray-600">(555) 123-4567</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <span className="text-2xl">✉️</span>
+                <div>
+                  <p className="font-bold text-gray-800">Email</p>
+                  <p className="text-gray-600">namkhatashee@gmail.com</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

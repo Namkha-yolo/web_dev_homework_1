@@ -29,62 +29,72 @@ export default function Menu() {
 
   if (loading) {
     return (
-      <section id="menu" className="py-20 px-[5%] max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-4xl font-bold text-gold mb-12">
-          Our Menu
-        </h2>
-        <div className="text-center text-gray-600">Loading menu...</div>
+      <section id="menu" className="py-24 px-[5%] bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
+            Our Menu
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg">
+            Authentic Italian dishes made with love
+          </p>
+          <div className="text-center text-gray-500 text-lg">Loading menu...</div>
+        </div>
       </section>
     );
   }
 
   return (
-    <section id="menu" className="py-20 px-[5%] max-w-7xl mx-auto">
-      <h2 className="text-center text-3xl md:text-4xl font-bold text-gold mb-12">
-        Our Menu
-      </h2>
-      {error && (
-        <p className="text-center text-gray-500 text-sm mb-4">{error}</p>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-        {menuData.map((category) => (
-          <div
-            key={category.category}
-            className="bg-white rounded-lg p-6 shadow-lg hover:-translate-y-1 transition-transform duration-300"
-          >
-            <h3 className="text-gold text-2xl font-bold mb-4 pb-2 border-b-2 border-gold">
-              {category.category}
-            </h3>
-            <div className="space-y-4">
-              {category.items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex flex-col sm:flex-row justify-between items-start pb-4 border-b border-gray-200 last:border-b-0"
-                >
-                  <div className="flex-1 mb-2 sm:mb-0">
-                    <h4 className="text-gray-800 text-lg font-semibold">
-                      {item.name}
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      {item.description}
-                    </p>
+    <section id="menu" className="py-24 px-[5%] bg-gray-50">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-center text-4xl md:text-5xl font-bold text-gold mb-4">
+          Our Menu
+        </h2>
+        <p className="text-center text-gray-600 mb-16 text-lg">
+          Authentic Italian dishes made with love
+        </p>
+        {error && (
+          <p className="text-center text-gray-500 text-sm mb-4">{error}</p>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {menuData.map((category) => (
+            <div
+              key={category.category}
+              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300"
+            >
+              <h3 className="text-gold text-2xl font-bold mb-6 pb-3 border-b-2 border-gold">
+                {category.category}
+              </h3>
+              <div className="space-y-6">
+                {category.items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex justify-between items-start gap-4 pb-6 border-b border-gray-100 last:border-b-0 last:pb-0"
+                  >
+                    <div className="flex-1">
+                      <h4 className="text-gray-800 text-lg font-semibold mb-1">
+                        {item.name}
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-end gap-3">
+                      <span className="text-gold font-bold text-xl">
+                        ${item.price.toFixed(2)}
+                      </span>
+                      <button
+                        onClick={() => addToCart(item)}
+                        className="bg-gold text-black px-5 py-2 rounded-full font-bold text-sm hover:bg-gold-dark hover:scale-105 active:scale-100 transition-all duration-300 cursor-pointer whitespace-nowrap shadow-md"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex flex-row sm:flex-col items-center sm:items-end gap-2 w-full sm:w-auto justify-between sm:justify-start">
-                    <span className="text-gold font-bold text-lg">
-                      ${item.price.toFixed(2)}
-                    </span>
-                    <button
-                      onClick={() => addToCart(item)}
-                      className="bg-gold text-black px-4 py-2 rounded font-bold text-sm hover:bg-gold-dark hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer whitespace-nowrap"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
